@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Customer - BYULOGISTICS</title>
+    <link rel="stylesheet" href="customer-dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <i class="fas fa-truck-fast"></i>
+                <span>BYU<span class="logo-accent">LOGISTICS</span></span>
+            </a>
+        </div>
+        <div class="user-welcome">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-details">
+                <span class="user-name">Customer</span>
+                <span class="user-status"><i class="fas fa-circle"></i> Online</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="menu-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="lacak">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Lacak Paket</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="riwayat">
+                    <i class="fas fa-history"></i>
+                    <span>Riwayat Pengiriman</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="kirim">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Kirim Paket</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="favorite">
+                    <i class="fas fa-heart"></i>
+                    <span>Alamat Favorit</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="profil">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profil Saya</span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Lacak resi...">
+            </div>
+            <div class="header-right">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">2</span>
+                </div>
+                <div class="quick-action">
+                    <a href="#" class="btn-kirim-paket" data-page="kirim">
+                        <i class="fas fa-plus"></i>
+                        Kirim Paket
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-text">
+                    <h1>Selamat Datang, Customer!</h1>
+                    <p>Kelola pengiriman paket Anda dengan mudah</p>
+                </div>
+                <div class="date-display">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="currentDate"></span>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="quick-stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalPengiriman">12</span>
+                        <span class="stat-label">Total Pengiriman</span>
+                    </div>
+                </div>
+                <div class="quick-stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="dalamPengiriman">3</span>
+                        <span class="stat-label">Dalam Pengiriman</span>
+                    </div>
+                </div>
+                <div class="quick-stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="terkirim">8</span>
+                        <span class="stat-label">Terkirim</span>
+                    </div>
+                </div>
+                <div class="quick-stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="menunggu">1</span>
+                        <span class="stat-label">Menunggu Penjemputan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracking Section -->
+            <div class="dashboard-row">
+                <div class="card tracking-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-map-marker-alt"></i> Lacak Paket</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="tracking-input">
+                            <input type="text" placeholder="Masukkan nomor resi..." id="trackingInput">
+                            <button class="btn-tracking" id="btnLacak">
+                                <i class="fas fa-search"></i> Lacak
+                            </button>
+                        </div>
+                        <div class="tracking-result" id="trackingResult" style="display: none;">
+                            <div class="package-info">
+                                <div class="package-header">
+                                    <span class="resi-number">BYU-2024-001234</span>
+                                    <span class="status-badge delivered">Delivered</span>
+                                </div>
+                                <div class="package-details">
+                                    <p><strong>Dikirim ke:</strong> Surabaya, Jawa Timur</p>
+                                    <p><strong>Tanggal:</strong> 08 Jan 2024</p>
+                                </div>
+                            </div>
+                            <div class="tracking-timeline">
+                                <div class="timeline-item completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Paket Diterima</h4>
+                                        <p>Surabaya, 08 Jan 2024 - 14:30</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Dalam Pengiriman</h4>
+                                        <p>Surabaya, 08 Jan 2024 - 08:15</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Berangkat dari Gudang</h4>
+                                        <p>Jakarta, 07 Jan 2024 - 22:00</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item completed">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <h4>Paket Diterima</h4>
+                                        <p>Jakarta, 07 Jan 2024 - 10:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Shipments -->
+            <div class="dashboard-row">
+                <div class="card recent-shipments">
+                    <div class="card-header">
+                        <h3>Pengiriman Terbaru</h3>
+                        <a href="#" class="view-all" data-page="riwayat">Lihat Semua</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>No. Resi</th>
+                                    <th>Tujuan</th>
+                                    <th>Layanan</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>BYU-2024-001234</td>
+                                    <td>Surabaya</td>
+                                    <td>Express</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                    <td>08 Jan 2024</td>
+                                    <td><button class="btn-action"><i class="fas fa-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>BYU-2024-001235</td>
+                                    <td>Bandung</td>
+                                    <td>Regular</td>
+                                    <td><span class="status shipping">Shipping</span></td>
+                                    <td>08 Jan 2024</td>
+                                    <td><button class="btn-action"><i class="fas fa-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>BYU-2024-001236</td>
+                                    <td>Medan</td>
+                                    <td>Cargo</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                    <td>07 Jan 2024</td>
+                                    <td><button class="btn-action"><i class="fas fa-eye"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Info -->
+            <div class="dashboard-row">
+                <div class="card services-info">
+                    <div class="card-header">
+                        <h3>Layanan Tersedia</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="services-grid">
+                            <div class="service-item">
+                                <i class="fas fa-truck"></i>
+                                <h4>Regular</h4>
+                                <p>2-3 hari kerja</p>
+                            </div>
+                            <div class="service-item">
+                                <i class="fas fa-bolt"></i>
+                                <h4>Express</h4>
+                                <p>1 hari kerja</p>
+                            </div>
+                            <div class="service-item">
+                                <i class="fas fa-ship"></i>
+                                <h4>Cargo</h4>
+                                <p>Barang besar</p>
+                            </div>
+                            <div class="service-item">
+                                <i class="fas fa-plane"></i>
+                                <h4>Next Flight</h4>
+                                <p>Same day</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kirim Paket Modal -->
+        <div class="modal" id="kirimModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2><i class="fas fa-shipping-fast"></i> Kirim Paket</h2>
+                    <button class="modal-close" id="closeKirimModal">&times;</button>
+                </div>
+                
+                <!-- Pilihan Jenis Pengiriman -->
+                <div class="jenis-pengiriman">
+                    <div class="jenis-option active" id="optionJemput">
+                        <i class="fas fa-truck"></i>
+                        <h4>Minta Penjemputan</h4>
+                        <p>Tim kami akan menjemput paket di lokasi Anda</p>
+                    </div>
+                    <div class="jenis-option" id="optionAntar">
+                        <i class="fas fa-building"></i>
+                        <h4>Antar ke Gudang</h4>
+                        <p>Anda mengirim langsung ke tempat kami</p>
+                    </div>
+                </div>
+
+                <form class="modal-form" id="kirimForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Jenis Layanan</label>
+                            <select id="jenisLayanan" required>
+                                <option value="">Pilih Layanan</option>
+                                <option value="regular">Regular (2-3 hari)</option>
+                                <option value="express">Express (1 hari)</option>
+                                <option value="cargo">Cargo (Barang Besar)</option>
+                                <option value="nextflight">Next Flight (Same Day)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Berat (Kg)</label>
+                            <input type="number" id="beratBarang" placeholder="0" min="1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nama Barang</label>
+                        <input type="text" id="namaBarang" placeholder="Contoh: Elektronik, Dokumentasi, dll" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nama Penerima</label>
+                            <input type="text" id="namaPenerima" placeholder="Nama penerima" required>
+                        </div>
+                        <div class="form-group">
+                            <label>No. Telepon Penerima</label>
+                            <input type="tel" id="teleponPenerima" placeholder="08xxxxxxxxxx" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Alamat Penerima</label>
+                        <textarea id="alamatPenerima" placeholder="Alamat lengkap tujuan" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Catatan (Opsional)</label>
+                        <textarea id="catatan" placeholder="Catatan khusus untuk pengiriman" rows="2"></textarea>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary modal-cancel" id="batalKirim">Batal</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Kirim Permintaan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="customer-dashboard.js"></script>
+</body>
+</html>
+
+

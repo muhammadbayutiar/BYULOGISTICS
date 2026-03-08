@@ -27,16 +27,13 @@ function initLogin() {
             const validPassword = 'admin123';
             
             if (email === validEmail && password === validPassword) {
-                // Login success
-                showNotification('Login berhasil! Mengalihkan ke dashboard...', 'success');
+                // Admin login - redirect to admin dashboard
+                showNotification('Login berhasil sebagai Admin! Mengalihkan ke dashboard...', 'success');
                 
-                // Simulate redirect after success
                 setTimeout(function() {
-                    // Store login status in localStorage
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('userEmail', email);
-                    
-                    // Redirect to dashboard
+                    localStorage.setItem('userRole', 'admin');
                     window.location.href = 'dashboard.html';
                 }, 1500);
             } else if (email === 'customer@byulogistics.com' && password === 'customer123') {
@@ -46,7 +43,7 @@ function initLogin() {
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('userEmail', email);
                     localStorage.setItem('userRole', 'customer');
-                    window.location.href = 'dashboard.html';
+                    window.location.href = 'customer-dashboard.html';
                 }, 1500);
             } else {
                 // Login failed
