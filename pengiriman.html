@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengiriman - BYULOGISTICS</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="pengiriman.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <i class="fas fa-truck-fast"></i>
+                <span>BYU<span class="logo-accent">LOGISTICS</span></span>
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="pengiriman.html" class="menu-item active">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Pengiriman</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="tracking">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Tracking</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="armada">
+                    <i class="fas fa-truck"></i>
+                    <span>Armada</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="gudang">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Gudang</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="laporan">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Laporan</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="pelanggan">
+                    <i class="fas fa-users"></i>
+                    <span>Pelanggan</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="menu-item" data-page="pengaturan">
+                    <i class="fas fa-cog"></i>
+                    <span>Pengaturan</span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Cari resi, pelanggan, atau tujuan...">
+            </div>
+            <div class="header-right">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Admin User</span>
+                        <span class="user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Pengiriman Content -->
+        <div class="content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Pengiriman</h1>
+                    <p>Kelola dan lacak semua pengiriman</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-outline" id="exportBtn">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                    <button class="btn btn-primary" id="newShipmentBtn">
+                        <i class="fas fa-plus"></i> Pengiriman Baru
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="statusFilter">
+                        <option value="">Semua Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="pickup">Pickup</option>
+                        <option value="transit">Transit</option>
+                        <option value="shipping">Shipping</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Tanggal</label>
+                    <input type="date" id="dateFilter">
+                </div>
+                <div class="filter-group">
+                    <label>Kota Tujuan</label>
+                    <select id="cityFilter">
+                        <option value="">Semua Kota</option>
+                        <option value="jakarta">Jakarta</option>
+                        <option value="surabaya">Surabaya</option>
+                        <option value="bandung">Bandung</option>
+                        <option value="medan">Medan</option>
+                        <option value="makassar">Makassar</option>
+                        <option value="semarang">Semarang</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Layanan</label>
+                    <select id="serviceFilter">
+                        <option value="">Semua Layanan</option>
+                        <option value="regular">Regular</option>
+                        <option value="express">Express</option>
+                        <option value="cargo">Cargo</option>
+                    </select>
+                </div>
+                <button class="btn btn-secondary" id="resetFilter">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="stats-row">
+                <div class="stat-mini">
+                    <span class="stat-mini-value" id="totalCount">0</span>
+                    <span class="stat-mini-label">Total</span>
+                </div>
+                <div class="stat-mini pending">
+                    <span class="stat-mini-value" id="pendingCount">0</span>
+                    <span class="stat-mini-label">Pending</span>
+                </div>
+                <div class="stat-mini transit">
+                    <span class="stat-mini-value" id="transitCount">0</span>
+                    <span class="stat-mini-label">Transit</span>
+                </div>
+                <div class="stat-mini delivered">
+                    <span class="stat-mini-value" id="deliveredCount">0</span>
+                    <span class="stat-mini-label">Delivered</span>
+                </div>
+            </div>
+
+            <!-- Shipments Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Daftar Pengiriman</h3>
+                    <div class="table-info">
+                        <span>Menampilkan <strong id="showingCount">0</strong> data</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="data-table" id="shipmentsTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th>No. Resi</th>
+                                <th>Tanggal</th>
+                                <th>Pelanggan</th>
+                                <th>Pengirim</th>
+                                <th>Penerima</th>
+                                <th>Tujuan</th>
+                                <th>Layanan</th>
+                                <th>Berat</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shipmentsBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            Halaman <strong id="currentPage">1</strong> dari <strong id="totalPages">1</strong>
+                        </div>
+                        <div class="pagination-buttons">
+                            <button class="btn-pagination" id="prevPage" disabled>
+                                <i class="fas fa-chevron-left"></i> Sebelumnya
+                            </button>
+                            <button class="btn-pagination" id="nextPage">
+                                Berikutnya <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shipment Detail Modal -->
+    <div class="modal" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container modal-lg">
+            <div class="modal-header">
+                <h2>Detail Pengiriman</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="detailContent">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- New Shipment Modal -->
+    <div class="modal" id="shipmentModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Pengiriman Baru</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form class="modal-form" id="shipmentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>No. Resi</label>
+                        <input type="text" value="BYU-2024-" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal</label>
+                        <input type="date" id="shipDate" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Pengirim</label>
+                        <input type="text" placeholder="Nama pengirim" required>
+                    </div>
+                    <div class="form-group">
+                        <label>No. Telepon</label>
+                        <input type="tel" placeholder="08xxxxxxxxxx" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alamat Pengirim</label>
+                    <textarea placeholder="Alamat lengkap pengirim" rows="2" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Penerima</label>
+                        <input type="text" placeholder="Nama penerima" required>
+                    </div>
+                    <div class="form-group">
+                        <label>No. Telepon Penerima</label>
+                        <input type="tel" placeholder="08xxxxxxxxxx" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alamat Penerima</label>
+                    <textarea placeholder="Alamat lengkap penerima" rows="2" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kota Tujuan</label>
+                        <select required>
+                            <option value="">Pilih Kota</option>
+                            <option value="jakarta">Jakarta</option>
+                            <option value="surabaya">Surabaya</option>
+                            <option value="bandung">Bandung</option>
+                            <option value="medan">Medan</option>
+                            <option value="makassar">Makassar</option>
+                            <option value="semarang">Semarang</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Layanan</label>
+                        <select required>
+                            <option value="">Pilih Layanan</option>
+                            <option value="regular">Regular</option>
+                            <option value="express">Express</option>
+                            <option value="cargo">Cargo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Berat (Kg)</label>
+                        <input type="number" placeholder="0" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Barang</label>
+                        <input type="text" placeholder="Contoh: Elektronik" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Catatan</label>
+                    <textarea placeholder="Catatan khusus (opsional)" rows="2"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary modal-cancel">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="pengiriman.js"></script>
+</body>
+</html>
+
