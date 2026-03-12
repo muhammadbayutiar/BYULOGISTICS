@@ -3,150 +3,16 @@
  * BYULOGISTICS - Pengiriman Page JavaScript
  */
 
-// Sample shipment data
-const shipmentsData = [
-    {
-        id: 1,
-        resi: 'BYU-2024-001234',
-        date: '2024-01-08',
-        customer: 'PT Maju Jaya',
-        sender: 'Budi Santoso',
-        senderPhone: '081234567890',
-        senderAddress: 'Jl. Sudirman No. 123, Jakarta',
-        recipient: 'Ahmad Wijaya',
-        recipientPhone: '081234567891',
-        recipientAddress: 'Jl. Ahmad Yani No. 45, Surabaya',
-        destination: 'Surabaya',
-        service: 'Express',
-        weight: 25,
-        status: 'delivered',
-        price: 350000
-    },
-    {
-        id: 2,
-        resi: 'BYU-2024-001235',
-        date: '2024-01-08',
-        customer: 'CV Berkah Logistik',
-        sender: 'Siti Aminah',
-        senderPhone: '081234567892',
-        senderAddress: 'Jl. Thamrin No. 78, Jakarta',
-        recipient: 'Budi Hermawan',
-        recipientPhone: '081234567893',
-        recipientAddress: 'Jl. Gatot Subroto No. 12, Jakarta',
-        destination: 'Jakarta',
-        service: 'Regular',
-        weight: 15,
-        status: 'shipping',
-        price: 180000
-    },
-    {
-        id: 3,
-        resi: 'BYU-2024-001236',
-        date: '2024-01-07',
-        customer: 'Toko Online Sejahtera',
-        sender: 'Toko Sejahtera',
-        senderPhone: '081234567894',
-        senderAddress: 'Jl. Braga No. 56, Bandung',
-        recipient: 'Deni Kurniawan',
-        recipientPhone: '081234567895',
-        recipientAddress: 'Jl. Asia Afrika No. 23, Bandung',
-        destination: 'Bandung',
-        service: 'Express',
-        weight: 8,
-        status: 'pending',
-        price: 120000
-    },
-    {
-        id: 4,
-        resi: 'BYU-2024-001237',
-        date: '2024-01-07',
-        customer: 'PT Indo Cargo',
-        sender: 'PT Indo Cargo',
-        senderPhone: '081234567896',
-        senderAddress: 'Jl. Pemuda No. 34, Medan',
-        recipient: 'Rina Susilowati',
-        recipientPhone: '081234567897',
-        recipientAddress: 'Jl. Diponegoro No. 78, Medan',
-        destination: 'Medan',
-        service: 'Cargo',
-        weight: 150,
-        status: 'delivered',
-        price: 2500000
-    },
-    {
-        id: 5,
-        resi: 'BYU-2024-001238',
-        date: '2024-01-06',
-        customer: 'UD Sumber Rejeki',
-        sender: 'H. Ahmad',
-        senderPhone: '081234567898',
-        senderAddress: 'Jl. Pettarani No. 90, Makassar',
-        recipient: 'Hj. Siti',
-        recipientPhone: '081234567899',
-        recipientAddress: 'Jl. Rappocini No. 45, Makassar',
-        destination: 'Makassar',
-        service: 'Regular',
-        weight: 45,
-        status: 'transit',
-        price: 550000
-    },
-    {
-        id: 6,
-        resi: 'BYU-2024-001239',
-        date: '2024-01-06',
-        customer: 'CV Maju Bersama',
-        sender: 'Pak Mahmud',
-        senderPhone: '081234567800',
-        senderAddress: 'Jl. MT Haryono No. 67, Semarang',
-        recipient: 'Ibu Dewi',
-        recipientPhone: '081234567801',
-        recipientAddress: 'Jl. Pandanaran No. 34, Semarang',
-        destination: 'Semarang',
-        service: 'Express',
-        weight: 12,
-        status: 'pickup',
-        price: 150000
-    },
-    {
-        id: 7,
-        resi: 'BYU-2024-001240',
-        date: '2024-01-05',
-        customer: 'PT Logistik Nusantara',
-        sender: 'PT Logistik Nusantara',
-        senderPhone: '081234567802',
-        senderAddress: 'Jl. Senen No. 45, Jakarta',
-        recipient: 'Pak Hadi',
-        recipientPhone: '081234567803',
-        recipientAddress: 'Jl. Pemuda No. 78, Surabaya',
-        destination: 'Surabaya',
-        service: 'Cargo',
-        weight: 200,
-        status: 'delivered',
-        price: 3200000
-    },
-    {
-        id: 8,
-        resi: 'BYU-2024-001241',
-        date: '2024-01-05',
-        customer: 'Toko Bangunan Jaya',
-        sender: 'Toko Jaya',
-        senderPhone: '081234567804',
-        senderAddress: 'Jl. Dago No. 12, Bandung',
-        recipient: 'Pak Udin',
-        recipientPhone: '081234567805',
-        recipientAddress: 'Jl. Setiabudi No. 56, Bandung',
-        destination: 'Bandung',
-        service: 'Regular',
-        weight: 80,
-        status: 'cancelled',
-        price: 950000
-    }
-];
+// Use shared Data module (data.js)
+let filteredData = Data.getAll();
+
+
 
 // Pagination variables
 let currentPage = 1;
 const itemsPerPage = 5;
-let filteredData = [...shipmentsData];
+// Removed hardcoded data - using Data module
+
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
@@ -172,10 +38,12 @@ function checkAuth() {
 function initSidebar() {
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('.main-content');
     
-    if (menuToggle) {
+    if (menuToggle && sidebar && mainContent) {
         menuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
+            sidebar.classList.toggle('hide');
+            mainContent.classList.toggle('full');
         });
     }
 }
@@ -231,10 +99,33 @@ function initShipmentModal() {
     if (shipmentForm) {
         shipmentForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            showNotification('Pengiriman berhasil dibuat!', 'success');
+            
+            // Collect form data
+            const formData = {
+                date: document.getElementById('shipDate').value,
+                customer: 'Customer', // Default or from auth
+                sender: shipmentForm.querySelector('input[placeholder="Nama pengirim"]').value,
+                senderPhone: shipmentForm.querySelector('input[placeholder="08xxxxxxxxxx"]').value, // First phone
+                senderAddress: shipmentForm.querySelector('textarea[placeholder="Alamat lengkap pengirim"]').value,
+                receiver: shipmentForm.querySelectorAll('input[placeholder="Nama penerima"]')[0].value,
+                receiverPhone: shipmentForm.querySelectorAll('input[placeholder="08xxxxxxxxxx"]')[1].value, // Second phone
+                receiverAddress: shipmentForm.querySelectorAll('textarea[placeholder="Alamat lengkap penerima"]')[0].value,
+                city: shipmentForm.querySelector('select').value || 'Jakarta',
+                service: shipmentForm.querySelectorAll('select')[1].value,
+                weight: parseInt(shipmentForm.querySelector('input[type="number"]').value),
+                itemType: shipmentForm.querySelector('input[placeholder="Contoh: Elektronik"]').value,
+                notes: shipmentForm.querySelector('textarea[placeholder="Catatan khusus (opsional)"]').value
+            };
+            
+            Data.create(formData);
+            filteredData = Data.getAll();
+            renderTable();
+            updateStats();
+            showNotification('Pengiriman baru berhasil dibuat!', 'success');
             shipmentForm.reset();
             setTimeout(closeModal, 1000);
         });
+
     }
     
     // Set default date
@@ -262,26 +153,34 @@ function renderTable() {
     
     pageData.forEach(function(item) {
         const tr = document.createElement('tr');
+        tr.dataset.id = item.id;
+        tr.dataset.customer = item.customer || '';
+        tr.dataset.sender = item.sender;
+        tr.dataset.receiver = item.receiver;
+        tr.dataset.city = item.city;
+        tr.dataset.service = item.service;
+        tr.dataset.weight = item.weight;
+        tr.dataset.status = item.status;
         tr.innerHTML = `
             <td><input type="checkbox" class="row-checkbox"></td>
-            <td class="resi-number">${item.resi}</td>
+            <td>${item.id}</td>
             <td>${formatDate(item.date)}</td>
-            <td>${item.customer}</td>
+            <td>${item.customer || ''}</td>
             <td>${item.sender}</td>
-            <td>${item.recipient}</td>
-            <td>${capitalizeFirst(item.destination)}</td>
+            <td>${item.receiver}</td>
+            <td>${capitalizeFirst(item.city)}</td>
             <td>${capitalizeFirst(item.service)}</td>
             <td>${item.weight} kg</td>
-            <td><span class="status-badge ${item.status}">${getStatusText(item.status)}</span></td>
+            <td><span class="status ${item.status}">${getStatusText(item.status)}</span></td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn-action view" onclick="viewDetail(${item.id})" title="Lihat Detail">
+                    <button class="btn-action btn-detail" title="Detail">
                         <i class="fas fa-eye"></i>
                     </button>
-                    <button class="btn-action edit" onclick="editShipment(${item.id})" title="Edit">
+                    <button class="btn-action btn-edit" title="Edit">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn-action delete" onclick="deleteShipment(${item.id})" title="Hapus">
+                    <button class="btn-action btn-delete" title="Hapus">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -294,13 +193,16 @@ function renderTable() {
     document.getElementById('showingCount').textContent = filteredData.length;
 }
 
+
 // Update stats
 function updateStats() {
-    document.getElementById('totalCount').textContent = filteredData.length;
-    document.getElementById('pendingCount').textContent = filteredData.filter(d => d.status === 'pending').length;
-    document.getElementById('transitCount').textContent = filteredData.filter(d => d.status === 'transit' || d.status === 'shipping').length;
-    document.getElementById('deliveredCount').textContent = filteredData.filter(d => d.status === 'delivered').length;
+    const stats = Data.getStats();
+    document.getElementById('totalCount').textContent = stats.total;
+    document.getElementById('pendingCount').textContent = stats.pending;
+    document.getElementById('transitCount').textContent = stats.shipping;
+    document.getElementById('deliveredCount').textContent = stats.delivered;
 }
+
 
 // Pagination
 function updatePagination() {
@@ -337,14 +239,13 @@ function initFilters() {
     const resetFilter = document.getElementById('resetFilter');
     
     function applyFilters() {
-        filteredData = shipmentsData.filter(function(item) {
-            const statusMatch = !statusFilter.value || item.status === statusFilter.value;
-            const dateMatch = !dateFilter.value || item.date === dateFilter.value;
-            const cityMatch = !cityFilter.value || item.destination === cityFilter.value;
-            const serviceMatch = !serviceFilter.value || item.service === serviceFilter.value;
-            
-            return statusMatch && dateMatch && cityMatch && serviceMatch;
-        });
+        const filters = {
+            status: statusFilter.value,
+            date: dateFilter.value,
+            city: cityFilter.value,
+            service: serviceFilter.value
+        };
+        filteredData = Data.getFiltered(filters);
         
         currentPage = 1;
         renderTable();
@@ -362,13 +263,14 @@ function initFilters() {
             dateFilter.value = '';
             cityFilter.value = '';
             serviceFilter.value = '';
-            filteredData = [...shipmentsData];
+            filteredData = Data.getAll();
             currentPage = 1;
             renderTable();
             updateStats();
         });
     }
 }
+
 
 // Search
 function initSearch() {
@@ -377,19 +279,19 @@ function initSearch() {
     if (searchInput) {
         searchInput.addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
-            
             if (searchTerm === '') {
-                filteredData = [...shipmentsData];
+                filteredData = Data.getAll();
             } else {
-                filteredData = shipmentsData.filter(function(item) {
-                    return item.resi.toLowerCase().includes(searchTerm) ||
-                           item.customer.toLowerCase().includes(searchTerm) ||
-                           item.sender.toLowerCase().includes(searchTerm) ||
-                           item.recipient.toLowerCase().includes(searchTerm) ||
-                           item.destination.toLowerCase().includes(searchTerm);
+                // Simple search - filter locally
+                filteredData = Data.getAll().filter(function(item) {
+                    const term = searchTerm;
+                    return item.id.toLowerCase().includes(term) ||
+                           (item.customer || '').toLowerCase().includes(term) ||
+                           item.sender.toLowerCase().includes(term) ||
+                           item.receiver.toLowerCase().includes(term) ||
+                           item.city.toLowerCase().includes(term);
                 });
             }
-            
             currentPage = 1;
             renderTable();
             updateStats();
@@ -397,160 +299,277 @@ function initSearch() {
     }
 }
 
-// View detail
-window.viewDetail = function(id) {
-    const shipment = shipmentsData.find(s => s.id === id);
-    if (!shipment) return;
+
+// Event delegation for action buttons
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-detail')) {
+        const row = e.target.closest('tr');
+        showDetailModal(row);
+    } else if (e.target.closest('.btn-edit')) {
+        const row = e.target.closest('tr');
+        showEditModal(row);
+    } else if (e.target.closest('.btn-delete')) {
+        const id = e.target.closest('tr').dataset.id;
+        if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
+            Data.delete(id);
+            filteredData = Data.getAll();
+            currentPage = 1;
+            renderTable();
+            updateStats();
+            showNotification('Data berhasil dihapus!', 'success');
+        }
+    }
+});
+
+function showDetailModal(row) {
+    const data = {
+        resi: row.dataset.id || row.cells[1].textContent.trim(),
+        tanggal: row.cells[2].textContent.trim(),
+        pelanggan: row.dataset.customer || row.cells[3].textContent.trim(),
+        pengirim: row.dataset.sender || row.cells[4].textContent.trim(),
+        penerima: row.dataset.receiver || row.cells[5].textContent.trim(),
+        tujuan: row.dataset.city || row.cells[6].textContent.trim(),
+        layanan: row.dataset.service || row.cells[7].textContent.trim(),
+        berat: row.dataset.weight || row.cells[8].textContent.trim(),
+        status: row.dataset.status || row.cells[9].querySelector('.status').textContent.trim()
+    };
     
     const modal = document.getElementById('detailModal');
     const content = document.getElementById('detailContent');
     
     content.innerHTML = `
         <div class="detail-section">
-            <h4>Informasi Pengiriman</h4>
+            <h4><i class="fas fa-info-circle"></i> Informasi Pengiriman</h4>
             <div class="detail-grid">
                 <div class="detail-item">
-                    <span class="detail-label">No. Resi</span>
-                    <span class="detail-value">${shipment.resi}</span>
+                    <span class="detail-label">No. Resi:</span>
+                    <span class="detail-value">${data.resi}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Tanggal</span>
-                    <span class="detail-value">${formatDate(shipment.date)}</span>
+                    <span class="detail-label">Tanggal:</span>
+                    <span class="detail-value">${data.tanggal}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Status</span>
-                    <span class="status-badge ${shipment.status}">${getStatusText(shipment.status)}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Layanan</span>
-                    <span class="detail-value">${capitalizeFirst(shipment.service)}</span>
+                    <span class="detail-label">Status:</span>
+                    <span class="status ${data.status}">${data.status}</span>
                 </div>
             </div>
         </div>
-        
         <div class="detail-section">
-            <h4>Informasi Pengirim</h4>
+            <h4><i class="fas fa-user"></i> Pelanggan & Pengirim</h4>
             <div class="detail-grid">
                 <div class="detail-item">
-                    <span class="detail-label">Nama</span>
-                    <span class="detail-value">${shipment.sender}</span>
+                    <span class="detail-label">Pelanggan:</span>
+                    <span class="detail-value">${data.pelanggan}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Telepon</span>
-                    <span class="detail-value">${shipment.senderPhone}</span>
-                </div>
-                <div class="detail-item" style="grid-column: span 2;">
-                    <span class="detail-label">Alamat</span>
-                    <span class="detail-value">${shipment.senderAddress}</span>
+                    <span class="detail-label">Pengirim:</span>
+                    <span class="detail-value">${data.pengirim}</span>
                 </div>
             </div>
         </div>
-        
         <div class="detail-section">
-            <h4>Informasi Penerima</h4>
+            <h4><i class="fas fa-map-marker-alt"></i> Penerima & Tujuan</h4>
             <div class="detail-grid">
                 <div class="detail-item">
-                    <span class="detail-label">Nama</span>
-                    <span class="detail-value">${shipment.recipient}</span>
+                    <span class="detail-label">Penerima:</span>
+                    <span class="detail-value">${data.penerima}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Telepon</span>
-                    <span class="detail-value">${shipment.recipientPhone}</span>
-                </div>
-                <div class="detail-item" style="grid-column: span 2;">
-                    <span class="detail-label">Alamat</span>
-                    <span class="detail-value">${shipment.recipientAddress}</span>
+                    <span class="detail-label">Tujuan:</span>
+                    <span class="detail-value">${data.tujuan}</span>
                 </div>
             </div>
         </div>
-        
         <div class="detail-section">
-            <h4>Detail Barang</h4>
+            <h4><i class="fas fa-box"></i> Detail Pengiriman</h4>
             <div class="detail-grid">
                 <div class="detail-item">
-                    <span class="detail-label">Berat</span>
-                    <span class="detail-value">${shipment.weight} kg</span>
+                    <span class="detail-label">Layanan:</span>
+                    <span class="detail-value">${data.layanan}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Biaya</span>
-                    <span class="detail-value">Rp ${shipment.price.toLocaleString('id-ID')}</span>
+                    <span class="detail-label">Berat:</span>
+                    <span class="detail-value">${data.berat}</span>
                 </div>
-            </div>
-        </div>
-        
-        <div class="detail-section">
-            <h4>Tracking History</h4>
-            <div class="timeline">
-                <div class="timeline-item completed">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h5>Pengiriman Dibuat</h5>
-                        <p>Resi dicetak dan siap diambil</p>
-                        <span class="timeline-time">${formatDate(shipment.date)} 08:00</span>
-                    </div>
-                </div>
-                ${shipment.status !== 'pending' ? `
-                <div class="timeline-item ${shipment.status === 'pickup' ? 'current' : 'completed'}">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h5>Pickup</h5>
-                        <p>Barang diambil dari pengirim</p>
-                        <span class="timeline-time">${formatDate(shipment.date)} 10:30</span>
-                    </div>
-                </div>
-                ` : ''}
-                ${['transit', 'shipping', 'delivered'].includes(shipment.status) ? `
-                <div class="timeline-item ${shipment.status === 'transit' || shipment.status === 'shipping' ? 'current' : 'completed'}">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h5>Transit</h5>
-                        <p>Barang dalam perjalanan</p>
-                        <span class="timeline-time">${formatDate(shipment.date)} 14:00</span>
-                    </div>
-                </div>
-                ` : ''}
-                ${shipment.status === 'delivered' ? `
-                <div class="timeline-item current">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h5>Delivered</h5>
-                        <p>Barang telah diterima</p>
-                        <span class="timeline-time">${formatDate(shipment.date)} 16:45</span>
-                    </div>
-                </div>
-                ` : ''}
             </div>
         </div>
     `;
     
+    modal.style.opacity = '0';
+    modal.style.transform = 'scale(0.8)';
     modal.classList.add('active');
     
-    // Close modal
-    const modalClose = modal.querySelector('.modal-close');
-    const modalOverlay = modal.querySelector('.modal-overlay');
+    setTimeout(() => {
+        modal.style.transition = 'all 0.3s ease';
+        modal.style.opacity = '1';
+        modal.style.transform = 'scale(1)';
+    }, 10);
     
-    modalClose.onclick = () => modal.classList.remove('active');
-    modalOverlay.onclick = () => modal.classList.remove('active');
-};
+    // Close
+    const closeBtn = modal.querySelector('.modal-close');
+    const overlay = modal.querySelector('.modal-overlay');
+    closeBtn.onclick = overlay.onclick = () => {
+        modal.style.opacity = '0';
+        modal.style.transform = 'scale(0.8)';
+        setTimeout(() => modal.classList.remove('active'), 300);
+    };
+}
 
-// Edit shipment
-window.editShipment = function(id) {
-    showNotification('Fitur edit akan segera tersedia!', 'success');
-};
-
-// Delete shipment
-window.deleteShipment = function(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus pengiriman ini?')) {
-        const index = shipmentsData.findIndex(s => s.id === id);
-        if (index > -1) {
-            shipmentsData.splice(index, 1);
-            filteredData = [...shipmentsData];
-            renderTable();
-            updateStats();
-            showNotification('Pengiriman berhasil dihapus!', 'success');
-        }
+function showEditModal(row) {
+    const data = {
+        customer: row.dataset.customer || row.cells[3].textContent.trim(),
+        sender: row.dataset.sender || row.cells[4].textContent.trim(),
+        receiver: row.dataset.receiver || row.cells[5].textContent.trim(),
+        city: row.dataset.city || row.cells[6].textContent.trim(),
+        service: row.dataset.service || row.cells[7].textContent.trim(),
+        weight: row.dataset.weight || row.cells[8].textContent.trim(),
+        status: row.dataset.status || row.cells[9].textContent.trim()
+    };
+    
+    let editModal = document.getElementById('editModal');
+    if (!editModal) {
+        editModal = createEditModal();
     }
-};
+    
+    const form = editModal.querySelector('#editForm');
+    form.customer.value = data.customer;
+    form.sender.value = data.sender;
+    form.receiver.value = data.receiver;
+    form.city.value = data.city;
+    form.service.value = data.service;
+    form.weight.value = data.weight;
+    form.status.value = data.status;
+    
+    editModal.style.opacity = '0';
+    editModal.style.transform = 'scale(0.8)';
+    editModal.classList.add('active');
+    
+    setTimeout(() => {
+        editModal.style.transition = 'all 0.3s ease';
+        editModal.style.opacity = '1';
+        editModal.style.transform = 'scale(1)';
+    }, 10);
+    
+    // Save
+    const rowId = row.dataset.id || row.cells[1].textContent.trim();
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        
+        // Simple validation
+        if (!form.customer.value.trim()) {
+            showNotification('Pelanggan harus diisi', 'error');
+            return;
+        }
+        
+        const updates = {
+            customer: form.customer.value.trim(),
+            sender: form.sender.value.trim(),
+            receiver: form.receiver.value.trim(),
+            city: form.city.value,
+            service: form.service.value,
+            weight: parseInt(form.weight.value),
+            status: form.status.value
+        };
+        
+        Data.update(rowId, updates);
+        filteredData = Data.getAll();
+        renderTable();
+        updateStats();
+        showNotification('Data berhasil diperbarui!', 'success');
+        
+        // Close
+        editModal.style.opacity = '0';
+        editModal.style.transform = 'scale(0.8)';
+        setTimeout(() => editModal.classList.remove('active'), 300);
+    };
+    
+    // Close
+    const closeBtn = editModal.querySelector('.modal-close');
+    const overlay = editModal.querySelector('.modal-overlay');
+    closeBtn.onclick = overlay.onclick = () => {
+        editModal.style.opacity = '0';
+        editModal.style.transform = 'scale(0.8)';
+        setTimeout(() => editModal.classList.remove('active'), 300);
+    };
+}
+
+function createEditModal() {
+    const modal = document.createElement('div');
+    modal.id = 'editModal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Edit Pengiriman</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <div class="form-group">
+                        <label>Pelanggan</label>
+                        <input type="text" name="customer" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Pengirim</label>
+                            <input type="text" name="sender" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Penerima</label>
+                            <input type="text" name="receiver" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tujuan</label>
+                            <select name="city" required>
+                                <option value="jakarta">Jakarta</option>
+                                <option value="surabaya">Surabaya</option>
+                                <option value="bandung">Bandung</option>
+                                <option value="medan">Medan</option>
+                                <option value="makassar">Makassar</option>
+                                <option value="semarang">Semarang</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Layanan</label>
+                            <select name="service" required>
+                                <option value="regular">Regular</option>
+                                <option value="express">Express</option>
+                                <option value="cargo">Cargo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Berat (Kg)</label>
+                            <input type="number" name="weight" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status" required>
+                                <option value="pending">Pending</option>
+                                <option value="shipping">Shipping</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary modal-cancel">Batal</button>
+                <button type="submit" form="editForm" class="btn-primary">Simpan</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    return modal;
+}
+
+
 
 // Export button
 document.getElementById('exportBtn').addEventListener('click', function() {

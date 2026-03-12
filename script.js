@@ -74,13 +74,13 @@ function initSmoothScroll() {
  * Scroll animations using Intersection Observer
  */
 function initScrollAnimations() {
-    const revealElements = document.querySelectorAll('.reveal');
+    const revealElements = document.querySelectorAll('.service-card, .fleet-card');
     
     const revealCallback = function(entries, observer) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target);
+                // DON'T unobserve - keep element visible forever
             }
         });
     };
@@ -92,19 +92,10 @@ function initScrollAnimations() {
     
     const observer = new IntersectionObserver(revealCallback, revealOptions);
     
-    revealElements.forEach(function(el) {
+    revealElements.forEach(function(el, index) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = (index * 0.1) + 's';
         observer.observe(el);
-    });
-    
-    // Add reveal class to elements
-    document.querySelectorAll('.service-card').forEach(function(el, index) {
-        el.classList.add('reveal');
-        el.style.transitionDelay = (index * 0.1) + 's';
-    });
-    
-    document.querySelectorAll('.fleet-card').forEach(function(el, index) {
-        el.classList.add('reveal');
-        el.style.transitionDelay = (index * 0.1) + 's';
     });
 }
 
