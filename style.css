@@ -209,16 +209,68 @@ img {
     transform: rotate(0deg) scale(1.05);
 }
 
-.hero-text {
+.hero-text-container {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    padding: 0 4rem;
+    max-width: 450px;
+    margin: 0 auto;
     text-align: center;
-    animation: fadeInUp 1s ease-out 0.3s both;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 
+@media (max-width: 1200px) {
+    .hero-text-container {
+        grid-column: 1 / -1;
+        order: -1;
+        padding: 0 2rem;
+        max-width: 100%;
+    }
+}
+
+
+
 .hero-title {
-    font-size: 4rem;
+    font-size: clamp(40px, 7vw, 60px);
     font-weight: 800;
-    line-height: 1;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin-bottom: 1rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+
+.hero-title .highlight {
+    color: #f59e0b;
+}
+
+.hero-subtitle {
+    font-size: clamp(14px, 2.2vw, 18px);
+    font-weight: 500;
+    margin: 1.2rem 0 2rem 0;
+    text-align: center;
+    line-height: 1.3;
+    color: var(--gray-300);
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.hero-desc {
+    font-size: clamp(16px, 2.5vw, 18px);
+    line-height: 1.6;
+    max-width: 450px;
+    margin: 1.5rem auto 2.5rem;
+    text-align: center;
+    color: var(--gray-200);
 }
 
 .title-line {
@@ -227,7 +279,6 @@ img {
 
 .title-accent {
     color: var(--secondary-color);
-    display: block;
 }
 
 .hero-tagline {
@@ -248,9 +299,12 @@ img {
 
 .hero-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    margin-top: 1rem;
+    position: relative;
+    top: -20px;
 }
 
 .btn {
@@ -349,10 +403,10 @@ img {
    ============================================ */
 .stats {
     background: var(--secondary-color);
-    padding: 3rem 0;
+    padding: 4rem 0 3rem 0;
     position: relative;
     z-index: 10;
-    margin-top: -50px;
+    margin-top: 0;
 }
 
 .stats-container {
@@ -370,23 +424,30 @@ img {
 }
 
 .stat-item i {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
+</xai:function_call)
+
+
+<xai:function_call name="edit_file">
+<parameter name="path">c:/Website/website/BYULOGISTICS/style.css
 
 .stat-number {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 800;
     line-height: 1;
     margin-bottom: 0.5rem;
 }
 
+
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.9;
 }
+
 
 /* ============================================
    Services Section
@@ -636,14 +697,49 @@ img {
 }
 
 .fleet-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  object-position: center;
+  background: var(--white);
+  display: block !important;
+  border-radius: 12px 12px 0 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: var(--transition);
+}
+
+.fleet-card:hover img {
+    transform: scale(1.05);
+}
+
+.fleet-badges {
+    list-style: none;
+    margin-top: 1rem;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.fleet-badges li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    color: var(--gray-500);
+}
+
+.fleet-badges i {
+    color: var(--secondary-color);
+    font-size: 0.75rem;
 }
 
 .fleet-info {
     padding: 1.5rem;
     text-align: center;
+}
+
+.fleet-card {
+    position: relative;
 }
 
 .fleet-info h4 {
@@ -1073,12 +1169,47 @@ img {
     }
     
     .fleet-showcase {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .fleet-card img {
+        height: 200px;
+    }
+    
+    .fleet-info h4 {
+        font-size: 1rem;
+    }
+    
+    .fleet-badges {
+        font-size: 0.8rem;
     }
     
     .footer-container {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .fleet-showcase {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 1.5rem;
     }
 }
 

@@ -51,10 +51,10 @@ function initSidebar() {
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.querySelector('.main-content');
     
-    if (menuToggle && sidebar) {
+    if (menuToggle && sidebar && mainContent) {
         menuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            mainContent.classList.toggle('sidebar-collapsed');
+            sidebar.classList.toggle('hide');
+            mainContent.classList.toggle('full');
         });
     }
 }
